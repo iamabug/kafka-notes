@@ -28,24 +28,24 @@ Kafka 要求接收的日志是 JSON 格式（否则下游的 Flink 不能正常�
 
 ```bash
 input {
-	file {
-		path => ["/Users/iamabug/1.log"]
-	}
+    file {
+        path => ["/Users/iamabug/1.log"]
+    }
 }
 filter {
-	grok {
-		match => {
+    grok {
+        match => {
             "message" => "\[(?<[res][timestamp]>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})\]\s+(?<[res][level]>\w+)\s+(?<[res][message]>.*)"
-		}
-	}
+        }
+    }
 }
 
 output {
-	kafka {
+    kafka {
         topic_id => "test"
-		codec => line { format => "%{[res]}" }
+        codec => line { format => "%{[res]}" }
         bootstrap_servers => "localhost:9092"
-	}
+    }
 }
 ```
 
@@ -53,25 +53,25 @@ output {
 
 1. 启动 Kafka，创建名为 `test` 的 topic，或者开启自动创建，然后消费 `test`：
 
-   ```bash
-   kafka-console-consumer.sh --topic test --bootstrap-server localhost:9092
-   ```
+```bash
+kafka-console-consumer.sh --topic test --bootstrap-server localhost:9092
+```
 
 2. 安装（Docker 中的安装方式参见 [Dockerfile](https://github.com/iamabug/kafka-notes/blob/master/logstash/setup/Dockerfile)）并启动 logstash，假设配置文件放在 logstash 安装目录下的 config 目录下，启动命令为：
 
-   ```bash
-   bin/logstash --path.config config/logstash.conf
-   ```
+```bash
+bin/logstash --path.config config/logstash.conf
+```
 
 3. 向 `/Users/iamabug/1.log`  添加两条日志，第二条日志中包含双引号：
 
-   ```bash
-    echo '[2020-01-14 15:00:00] INFO iamabug is not happy' >> ~/1.log
-    echo '[2020-01-14 15:00:00] INFO "I want to go home", says iamabug' >> ~/1.log
-   ```
+```bash
+echo '[2020-01-14 15:00:00] INFO iamabug is not happy' >> ~/1.log
+echo '[2020-01-14 15:00:00] INFO "I want to go home", says iamabug' >> ~/1.log
+```
 
 4. 查看 Kafka 命令行输出：
 
-   ![](https://tva1.sinaimg.cn/large/006tNbRwly1gaw50rf4obj312h041dgo.jpg)
+![](https://tva1.sinaimg.cn/large/006tNbRwly1gaw50rf4obj312h041dgo.jpg)
 
-   可以看到，双引号会自动进行转义。
+可以看到，双引号会自动进行转义。
