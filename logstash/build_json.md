@@ -35,7 +35,7 @@ input {
 filter {
 	grok {
 		match => {
-        "message" => "\[(?<[res][timestamp]>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})\]\s+(?<[res][level]>\w+)\s+(?<[res][message]>.*)"
+            "message" => "\[(?<[res][timestamp]>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})\]\s+(?<[res][level]>\w+)\s+(?<[res][message]>.*)"
 		}
 	}
 }
@@ -43,7 +43,7 @@ filter {
 output {
 	kafka {
         topic_id => "test"
-				codec => line { format => "%{[res]}" }
+		codec => line { format => "%{[res]}" }
         bootstrap_servers => "localhost:9092"
 	}
 }
