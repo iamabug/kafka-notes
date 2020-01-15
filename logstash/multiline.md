@@ -61,12 +61,14 @@ output {
   [2020-01-15] ERROR some exception:
   second exception
   third exception
-  [2020-01-15] INFO no probelm
+  [2020-01-15] INFO no problem
+  
   ```
 
   注意：这里额外添加了一条符合模式的单行日志，否则 logstash 会一直等待。
 
 3. 观察 logstash 的输出：
+
   ![](https://tva1.sinaimg.cn/large/006tNbRwly1gax9kqnzw8j311p09a0u2.jpg)
 
   可以看到，多行日志被使用换行符拼接成了一条日志，存储在 `message` 中。
