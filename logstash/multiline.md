@@ -62,7 +62,6 @@ output {
   second exception
   third exception
   [2020-01-15] INFO no problem
-  
   ```
 
   注意：这里额外添加了一条符合模式的单行日志，否则 logstash 会一直等待。
