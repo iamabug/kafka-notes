@@ -33,7 +33,7 @@ input {
     file {
         path => ["/Users/iamabug/1.log"]
         codec => multiline {
-        		# 可以不用写完整的正则表达式，只写开头，能够区分是换行的日志即可
+            # 可以不用写完整的正则表达式，只写开头，能够区分是换行的日志即可
             pattern => "^\[\d{4}-\d{2}-\d{2}\]\s+[a-zA-Z]+\s+[\s\S]+"
             negate => true
             what => "previous"
@@ -42,7 +42,7 @@ input {
 }
 
 output {
-		# 为了测试方便，直接输出在终端
+    # 为了测试方便，直接输出在终端
     stdout {}
 }
 ```
