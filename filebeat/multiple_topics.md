@@ -68,7 +68,7 @@ filebeat 同时采集多个日志文件，且日志文件的格式有所差异�
    Exiting: error loading config file: yaml: line 20: found unknown escape character
    ```
 
-   在 elastic 论坛提交了这个问题：https://discuss.elastic.co/t/filebeat-kafka-out-plugin-error-when-configuring-multiple-topics-using-regex/215264。
+   在 elastic 论坛提交了这个问题：https://discuss.elastic.co/t/filebeat-kafka-out-plugin-error-when-configuring-multiple-topics-using-regex/215264，**更新：正则表达式需要使用单引号包起来。**
 
 # 验证
 
